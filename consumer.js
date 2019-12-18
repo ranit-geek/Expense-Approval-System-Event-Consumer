@@ -2,7 +2,7 @@ const request = require('request');
 const mongo = require("./lib/mongoutils")
 const mongoUrl= "mongodb://localhost:27017/mydb"
 const validateReq=require("./lib/validateSchema")
-const producerUrl = 'http://localhost:3111'
+const producerUrl = 'https://cashcog.xcnt.io/stream'
 
 const req = request(producerUrl)
   .on('data', async data => { 
