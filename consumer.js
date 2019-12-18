@@ -12,12 +12,12 @@ const req = request(producerUrl)
     {
         const connection = await mongo.connect(mongoUrl)
         query = {"uuid" : event["uuid"]}
-        console.log(query)
         const findEntry=mongo.queryCustom(query)
                     .then(async (res)=>{
                         if (!res.count > 0)
                         {
                             const result= await mongo.insert(event)
+                            console.log(event)
                             console.log("@@@@@@@@@@@@@@-------ADDED---------@@@@@@@@@@2")
                             console.log(result); 
                         }
