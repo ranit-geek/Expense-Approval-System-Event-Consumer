@@ -5,7 +5,7 @@ function validateSchema(course)
         const schemaPost={
             uuid : Joi.string().min(2).required(),
             description : Joi.string().min(2).required(),
-            created_at : Joi.string().min(2).required(),
+            created_at : Joi.date().required(),
             amount: Joi.number().min(2).required(),
             currency: Joi.string().min(2).required(),
             employee: {

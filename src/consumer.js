@@ -12,25 +12,24 @@ const req = request(producerUrl)
     {
         const connection = await mongo.connect(mongoUrl)
         query = {"uuid" : event["uuid"]}
-        const findEntry=mongo.queryCustom(query)
-                    .then(async (res)=>{
-                        if (!res.count > 0)
-                        {
-                            const result= await mongo.insert(event)
-                            console.log(event)
-                            console.log("@@@@@@@@@@@@@@-------ADDED---------@@@@@@@@@@@")
-                            console.log(result); 
-                        }
-                        else{
-                            console.log("Ignoring duplicate events")
-                            console.log("***************************")
-                            console.log(res)
-                            console.log("***************************")
-                        }
-                    })
-                    .catch(async (err)=>{
-                        console.log(err)
-                    })
+        const findEntry= await mongo.queryCustom(query)           
+        if (!findEntry.count > 0)
+        {
+            console.log(findEntry)
+            event["created_at"] = new Date(event["created_at"])
+            const result= await mongo.insert(event)
+            
+            console.log("@@@@@@@@@@@@@@-------ADDED---------@@@@@@@@@@@")
+            
+        }
+        else{
+            console.log("Ignoring duplicate events")
+            console.log("***************************")
+            
+            console.log("***************************")
+        }
+                   
+                  
     }
     if(result.error!=null)
     {

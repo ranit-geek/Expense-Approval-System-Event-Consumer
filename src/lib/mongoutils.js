@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const schema = new mongoose.Schema({
     uuid : String,
     description : String,
-    created_at : String,
+    created_at : Date,
     amount: Number,
     currency: String,
     employee: {
@@ -36,7 +36,6 @@ async function InsertIntoDb(req){
     const Expense = mongoose.model("Expense",schema)
     const expense = new Expense(req)
     const result = await expense.save()
-    console.log(result)
     return result
 }
 
