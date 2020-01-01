@@ -1,8 +1,8 @@
 const request = require('request');
 const mongo = require("./lib/mongoutils")
-const mongoUrl= "mongodb://localhost:27017/mydb"
+const mongoUrl= process.env.MONGO_URL
 const validateReq=require("./lib/validateSchema")
-const producerUrl = 'https://cashcog.xcnt.io/stream'
+const producerUrl = process.env.EVENT_PRODUCER_URL
 
 const req = request(producerUrl)
   .on('data', async data => { 
@@ -24,8 +24,6 @@ const req = request(producerUrl)
         }
         else{
             console.log("Ignoring duplicate events")
-            console.log("***************************")
-            
             console.log("***************************")
         }
                    
